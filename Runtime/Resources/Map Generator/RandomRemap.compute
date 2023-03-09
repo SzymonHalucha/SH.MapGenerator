@@ -1,0 +1,26 @@
+#include "Utils.cginc"
+#pragma kernel RandomRemap
+
+StructuredBuffer<float> MaskBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+uint _Seed;
+uint _MinRange;
+uint _MaxRange;
+float2 _StartOffset;
+
+[numthreads(8, 8, 1)]
+void RandomRemap(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+
+    if(MaskBuffer[index] == 0.0)
+    {
+        TargetBuffer[index] = 0.0;
+        return;
+    }
+
+    uint biomeIndex = Range(_Seed + uint(MaskBuffer[index]), _MinRange, _MaxRange);
+    TargetBuffer[index] = float(biomeIndex);
+}

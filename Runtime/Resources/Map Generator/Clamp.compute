@@ -1,0 +1,14 @@
+#pragma kernel Clamp
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Min;
+float _Max;
+
+[numthreads(8, 8, 1)]
+void Clamp(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = clamp(value, _Min, _Max);
+}

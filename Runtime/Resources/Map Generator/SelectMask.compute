@@ -1,0 +1,13 @@
+#pragma kernel SelectMask
+
+StructuredBuffer<float> MaskBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+uint _Index;
+
+[numthreads(8, 8, 1)]
+void SelectMask(uint3 id : SV_DispatchThreadID)
+{
+    TargetBuffer[id.x + id.y * _Size] = (uint(MaskBuffer[id.x + id.y * _Size]) == _Index) ? 1.0 : 0.0;
+}

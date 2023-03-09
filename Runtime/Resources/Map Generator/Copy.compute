@@ -1,0 +1,12 @@
+#pragma kernel Copy
+
+StructuredBuffer<float> OriginBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+
+[numthreads(8, 8, 1)]
+void Copy(uint3 id : SV_DispatchThreadID)
+{
+    TargetBuffer[id.x + id.y * _Size] = OriginBuffer[id.x + id.y * _Size];
+}

@@ -1,0 +1,29 @@
+#pragma kernel Voronoi
+
+StructuredBuffer<float2> PointsBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+uint _PointsCount;
+
+[numthreads(8, 8, 1)]
+void Voronoi(uint3 id : SV_DispatchThreadID)
+{
+    float minDistance = 2147483647;
+    uint minIndex = 0;
+
+    for (uint i = 0; i < _PointsCount; i++)
+    {
+        float distanceX = PointsBuffer[i].x - float(id.x) / _Size;
+        float distanceY = PointsBuffer[i].y - float(id.y) / _Size;
+        float distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        if (distance >= minDistance)
+            continue;
+
+        minDistance = distance;
+        minIndex = i;
+    }
+    
+    TargetBuffer[id.x + id.y * _Size] = minIndex;
+}

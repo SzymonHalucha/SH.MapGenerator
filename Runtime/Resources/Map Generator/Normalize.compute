@@ -1,0 +1,26 @@
+#pragma kernel MinMax
+#pragma kernel Normalize
+
+#define PRECISION 10000
+
+RWStructuredBuffer<int> MinMaxBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+
+[numthreads(8, 8, 1)]
+void MinMax(uint3 id : SV_DispatchThreadID)
+{
+    int value = int(TargetBuffer[id.x + id.y * _Size] * PRECISION);
+    int oldValue;
+
+    InterlockedMin(MinMaxBuffer[0], value, oldValue);
+    InterlockedMax(MinMaxBuffer[1], value, oldValue);
+}
+
+[numthreads(8, 8, 1)]
+void Normalize(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = (value - MinMaxBuffer[0] / float(PRECISION)) / (MinMaxBuffer[1] / float(PRECISION) - MinMaxBuffer[0] / float(PRECISION));
+}

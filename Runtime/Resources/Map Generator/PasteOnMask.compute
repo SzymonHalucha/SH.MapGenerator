@@ -1,0 +1,14 @@
+#pragma kernel PasteOnMask
+
+StructuredBuffer<float> BiomeBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+uint _Index;
+
+[numthreads(8, 8, 1)]
+void PasteOnMask(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = (value - 1.0 == float(_Index)) ? BiomeBuffer[id.x + id.y * _Size] : value;
+}

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ab15c7db0caba41a7cc81564f30869, type: 3}
+  m_Name: World4K
+  m_EditorClassIdentifier: 
+  seed: 135505422
+  heightMapSize: 4096
+  splatMapSize: 4096
+  preBiomesNoises:
+  - {fileID: 11400000, guid: e2725ab003c7dab459d19c3da2b5ec0b, type: 2}
+  - {fileID: 11400000, guid: 042475dca0682bf4a873deb63f2ba7a4, type: 2}
+  biomes:
+  - {fileID: 11400000, guid: c285c9c7c0bbf7e459fee82b57437b5a, type: 2}
+  - {fileID: 11400000, guid: b2793ce156373c74391eaccb4dcdd744, type: 2}
+  - {fileID: 11400000, guid: fd331463474fb4f43837318f86c34bfa, type: 2}
+  - {fileID: 11400000, guid: 3a52511ef62da954eab3fe36740a92b0, type: 2}
+  - {fileID: 11400000, guid: 3baa60c9e30e15947a682205d00627af, type: 2}
+  postBiomesNoises:
+  - {fileID: 11400000, guid: 775b65eb68090ea4cb118deef11442a8, type: 2}
+  - {fileID: 11400000, guid: 7c4c273eef00f494080fa6056adcbe1d, type: 2}
+  splatMapNoises:
+  - {fileID: 11400000, guid: f49f969a03702d742be34e864c901068, type: 2}
+  computeShaders:
+  - {fileID: 7200000, guid: 6c7ae559ae987334b8e013d8c62c2d39, type: 3}
+  - {fileID: 7200000, guid: b79ca9bb292f28f43b070281e9fa6b04, type: 3}
+  - {fileID: 7200000, guid: c1c3d7a5df5e92d4eba750f13d0229c8, type: 3}
+  - {fileID: 7200000, guid: 9292192738afa234aa7741dedcb6cbe4, type: 3}
+  - {fileID: 7200000, guid: 17ef82fcf5ccc4345bcb03d7e6aaa8b9, type: 3}
+  - {fileID: 7200000, guid: 90b38556f7c031c4e93dbcc548acafe7, type: 3}
+  - {fileID: 7200000, guid: dba4ba06198dd9748b5ccbaddcec4e44, type: 3}
+  - {fileID: 7200000, guid: 4a484ceb2ceb69544984d78a55d92132, type: 3}
+  - {fileID: 7200000, guid: d895e3a64287b114f86ba93758b3b372, type: 3}
+  - {fileID: 7200000, guid: 0ad0083b4cd9d214b86c2a2435fe1623, type: 3}
+  - {fileID: 7200000, guid: 35919e1d2786bc248b5a499c001a2829, type: 3}
+  - {fileID: 7200000, guid: 0222bfb69b9198548b41ee88873f9953, type: 3}
+  - {fileID: 7200000, guid: 12ac786cfd26d5b4797724b3e8f0d3ac, type: 3}
+  - {fileID: 7200000, guid: 622b402ee25d3204ea838225a2236a0d, type: 3}
+  - {fileID: 7200000, guid: a680febc8f4fffb4e90e40cc2d1472ba, type: 3}
+  - {fileID: 7200000, guid: 022c0459dc42167409c89d92c817ddb1, type: 3}
+  - {fileID: 7200000, guid: 7ac77a574c6618142bd5c9ee8b337d4e, type: 3}
+  - {fileID: 7200000, guid: c654a8475a9551c4cb2ca975647b5f72, type: 3}
+  - {fileID: 7200000, guid: ad123b80ff5bc0645a56dbab7e25b48c, type: 3}
+  - {fileID: 7200000, guid: f0224a5462f57c549bd5748cfb277be9, type: 3}
+  - {fileID: 7200000, guid: 0b2f7db09bdeb0343b0004dd05162d91, type: 3}
+  - {fileID: 7200000, guid: df00232f64bb37546977b1b89773c0a7, type: 3}
+  - {fileID: 7200000, guid: c5576391d8bc23e45a037ba2894fc629, type: 3}
+  - {fileID: 7200000, guid: 6131ac632551e7848a07514f8c7f2bef, type: 3}
+  - {fileID: 7200000, guid: e15816a36b21fe040a04e075a44b4890, type: 3}
+  - {fileID: 7200000, guid: 9ef55aca7504dfe478a7b23c6e7f95b0, type: 3}

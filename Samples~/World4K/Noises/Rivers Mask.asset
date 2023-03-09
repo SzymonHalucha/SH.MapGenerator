@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Rivers Mask
+  m_EditorClassIdentifier: 
+  generators:
+  - rid: 2159632388990697474
+  - rid: 2159632388990697475
+  - rid: 2159632388990697476
+  - rid: 2159632388990697477
+  - rid: 2159632388990697478
+  - rid: 2159632388990697490
+  references:
+    version: 2
+    RefIds:
+    - rid: 2159632388990697474
+      type: {class: EdgeDetectorGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        originBuffer: {fileID: 11400000, guid: bc28a4e601709444a9bb4e6ae87ed0c5, type: 2}
+        outputBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+        threshold: 0.05
+    - rid: 2159632388990697475
+      type: {class: EdgeDetectorGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        originBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+        outputBuffer: {fileID: 11400000, guid: e528c4e4cae355c43803e46e10147db7, type: 2}
+        threshold: 0.05
+    - rid: 2159632388990697476
+      type: {class: GaussianBlurGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        originBuffer: {fileID: 11400000, guid: e528c4e4cae355c43803e46e10147db7, type: 2}
+        outputBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+        sigma: 8
+    - rid: 2159632388990697477
+      type: {class: InvertGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        outputBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+    - rid: 2159632388990697478
+      type: {class: PowerGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        outputBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+        power: 6
+    - rid: 2159632388990697490
+      type: {class: ClampGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        enabled: 1
+        outputBuffer: {fileID: 11400000, guid: 55deb459508c2e84190fd4a45ec25934, type: 2}
+        min: 0
+        max: 1

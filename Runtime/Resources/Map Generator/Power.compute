@@ -1,0 +1,13 @@
+#pragma kernel Power
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Power;
+
+[numthreads(8, 8, 1)]
+void Power(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = pow(abs(value), _Power);
+}

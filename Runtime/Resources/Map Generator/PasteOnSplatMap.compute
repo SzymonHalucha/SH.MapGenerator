@@ -1,0 +1,16 @@
+#pragma kernel PasteOnSplatMap
+
+StructuredBuffer<float> LayerBuffer;
+RWStructuredBuffer<float> SplatMapBuffer;
+
+uint _Size;
+uint _Depth;
+uint _CurrentDepth;
+float _Multiplier;
+
+[numthreads(8, 8, 1)]
+void PasteOnSplatMap(uint3 id : SV_DispatchThreadID)
+{
+    uint multipliedIndex = uint(id.x * _Multiplier) * uint(_Size * _Multiplier) + uint(id.y * _Multiplier);
+    SplatMapBuffer[id.x * _Size * _Depth + id.y * _Depth + _CurrentDepth] = LayerBuffer[multipliedIndex];
+}

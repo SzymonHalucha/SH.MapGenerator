@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Biomes Mask
+  m_EditorClassIdentifier: 
+  generators:
+  - rid: 5590394518567124992
+  - rid: 5590394518567124993
+  - rid: 5590394518567124994
+  - rid: 5590394518567124996
+  - rid: 5590394518567124995
+  - rid: 5590394518567124998
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394518567124992
+      type: {class: BlueNoiseGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: c13fe768b37fba64fad382af9377cfe7, type: 2}
+        AmountSqrt: 6
+    - rid: 5590394518567124993
+      type: {class: VoronoiGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        targetBuffer: {fileID: 11400000, guid: 494e6280934718e4499ddc9306fc9a1d, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: c13fe768b37fba64fad382af9377cfe7, type: 2}
+    - rid: 5590394518567124994
+      type: {class: PointsToCenterModifierGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        TargetBuffer: {fileID: 11400000, guid: 494e6280934718e4499ddc9306fc9a1d, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: c13fe768b37fba64fad382af9377cfe7, type: 2}
+        threshold: 0.35
+    - rid: 5590394518567124995
+      type: {class: DistortionModifierGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        TargetBuffer: {fileID: 11400000, guid: 9e4fe3e7d9856c342930b3306dc3402c, type: 2}
+        originBuffer: {fileID: 11400000, guid: 494e6280934718e4499ddc9306fc9a1d, type: 2}
+        distortionBuffer: {fileID: 11400000, guid: 781b7e0b74b07af40bc6ba2e057f0a17, type: 2}
+        strength: 0.035
+    - rid: 5590394518567124996
+      type: {class: PerlinGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        targetBuffer: {fileID: 11400000, guid: 781b7e0b74b07af40bc6ba2e057f0a17, type: 2}
+        octaves: 2
+        scale: 120
+        persistence: 0.4
+        lacunarity: 1
+    - rid: 5590394518567124998
+      type: {class: RandomRemapBiomeGenerator, ns: SH.MapGenerator.Generators.Biomes, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        targetBuffer: {fileID: 11400000, guid: 494e6280934718e4499ddc9306fc9a1d, type: 2}
+        originBuffer: {fileID: 11400000, guid: 9e4fe3e7d9856c342930b3306dc3402c, type: 2}
+        minRange: 1
+        maxRange: 6

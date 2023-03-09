@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Island Mask
+  m_EditorClassIdentifier: 
+  generators:
+  - rid: 5590394518567125003
+  - rid: 5590394518567125005
+  - rid: 5590394518567125004
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394518567125003
+      type: {class: MultiplyBlendGenerator, ns: SH.MapGenerator.Generators.Blends, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        TargetBuffer: {fileID: 11400000, guid: 781b7e0b74b07af40bc6ba2e057f0a17, type: 2}
+        BlendBuffer: {fileID: 11400000, guid: 494e6280934718e4499ddc9306fc9a1d, type: 2}
+        Weight: 1
+    - rid: 5590394518567125004
+      type: {class: GaussianBlurModifierGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        TargetBuffer: {fileID: 11400000, guid: 9e4fe3e7d9856c342930b3306dc3402c, type: 2}
+        originBuffer: {fileID: 11400000, guid: 781b7e0b74b07af40bc6ba2e057f0a17, type: 2}
+        sigma: 3
+    - rid: 5590394518567125005
+      type: {class: ClampModifierGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        TargetBuffer: {fileID: 11400000, guid: 781b7e0b74b07af40bc6ba2e057f0a17, type: 2}
+        min: 0
+        max: 0.3

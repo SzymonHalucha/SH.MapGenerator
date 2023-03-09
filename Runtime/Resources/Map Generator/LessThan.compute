@@ -1,0 +1,13 @@
+#pragma kernel LessThan
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Threshold;
+
+[numthreads(8, 8, 1)]
+void LessThan(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = float(value < _Threshold);
+}

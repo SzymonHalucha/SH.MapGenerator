@@ -1,0 +1,33 @@
+{
+    "name": "com.sh.mapgenerator",
+    "version": "1.0.0",
+    "displayName": "Map Generator",
+    "description": "This is a procedural map generator.",
+    "unity": "2021.3",
+    "documentationUrl": "https://github.com/Better-Than-Games/Map-Generator/blob/main/README.md",
+    "changelogUrl": "https://github.com/Better-Than-Games/Map-Generator/blob/main/CHANGELOG.md",
+    "licensesUrl": "https://github.com/Better-Than-Games/Map-Generator/blob/main/LICENSE.md",
+    "keywords": [
+        "map",
+        "generator",
+        "biomes",
+        "procedural"
+    ],
+    "samples": [
+        {
+            "displayName": "Flat4K",
+            "description": "Includes flat world in 4k resolution",
+            "path": "Samples~/Flat4K"
+        },
+        {
+            "displayName": "World4K",
+            "description": "Includes normal world in 4k resolution",
+            "path": "Samples~/World4K"
+        }
+    ],
+    "author": {
+        "name": "Szymon Hałucha",
+        "email": "szymon.halucha.contact@gmail.com",
+        "url": "https://github.com/SzymonHalucha"
+    }
+}

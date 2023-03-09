@@ -1,0 +1,66 @@
+#pragma kernel AddBlend
+#pragma kernel SubtractBlend
+#pragma kernel MultiplyBlend
+#pragma kernel DivideBlend
+#pragma kernel MinBlend
+#pragma kernel MaxBlend
+#pragma kernel LerpBlend
+
+StructuredBuffer<float> BlendBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Weight;
+float2 _StartOffset;
+
+[numthreads(8, 8, 1)]
+void AddBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    TargetBuffer[index] += lerp(0.0, BlendBuffer[index], _Weight);
+}
+
+[numthreads(8, 8, 1)]
+void SubtractBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    TargetBuffer[index] -= lerp(0.0, BlendBuffer[index], _Weight);
+}
+
+[numthreads(8, 8, 1)]
+void MultiplyBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    TargetBuffer[index] *= lerp(1.0, BlendBuffer[index], _Weight);
+}
+
+[numthreads(8, 8, 1)]
+void DivideBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    TargetBuffer[index] /= lerp(1.0, BlendBuffer[index], _Weight);
+}
+
+[numthreads(8, 8, 1)]
+void MinBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    float value = TargetBuffer[index];
+    TargetBuffer[index] = BlendBuffer[index] > 0.0 ? lerp(value, min(value, BlendBuffer[index]), _Weight) : value;
+}
+
+[numthreads(8, 8, 1)]
+void MaxBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    float value = TargetBuffer[index];
+    TargetBuffer[index] = BlendBuffer[index] < 1.0 ? lerp(value, max(value, BlendBuffer[index]), _Weight) : value;
+}
+
+[numthreads(8, 8, 1)]
+void LerpBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    float value = TargetBuffer[index];
+    TargetBuffer[index] = lerp(value, BlendBuffer[index], _Weight);
+}

@@ -1,0 +1,12 @@
+#pragma kernel Invert
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+
+[numthreads(8, 8, 1)]
+void Invert(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = 1.0 - value;
+}

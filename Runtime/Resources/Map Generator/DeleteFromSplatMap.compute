@@ -1,0 +1,17 @@
+#pragma kernel DeleteFromSplatMap
+
+StructuredBuffer<float> LayerBuffer;
+RWStructuredBuffer<float> SplatMapBuffer;
+
+uint _Size;
+uint _Depth;
+uint _CurrentDepth;
+float _Multiplier;
+
+[numthreads(8, 8, 1)]
+void DeleteFromSplatMap(uint3 id : SV_DispatchThreadID)
+{
+    float value = SplatMapBuffer[id.x * _Size * _Depth + id.y * _Depth + _CurrentDepth];
+    uint multipliedIndex = uint(id.x * _Multiplier) * uint(_Size * _Multiplier) + uint(id.y * _Multiplier);
+    SplatMapBuffer[id.x * _Size * _Depth + id.y * _Depth + _CurrentDepth] = LayerBuffer[multipliedIndex] > 0.0 ? 0.0 : value;
+}

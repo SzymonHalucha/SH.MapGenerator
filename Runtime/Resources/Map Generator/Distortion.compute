@@ -1,0 +1,17 @@
+#pragma kernel Distortion
+
+RWStructuredBuffer<float> TargetBuffer;
+StructuredBuffer<float> OriginBuffer;
+StructuredBuffer<float> DistortionBuffer;
+
+uint _Size;
+float _Strength;
+
+[numthreads(8, 8, 1)]
+void Distortion(uint3 id : SV_DispatchThreadID)
+{
+    uint x = max((id.x + int(_Strength * DistortionBuffer[id.x + id.y * _Size] * _Size)) % _Size, 0);
+    uint y = max((id.y + int(_Strength * DistortionBuffer[(_Size - id.x - 1) + (_Size - id.y - 1) * _Size] * _Size)) % _Size, 0);
+
+    TargetBuffer[id.x + id.y * _Size] = OriginBuffer[x + y * _Size];
+}

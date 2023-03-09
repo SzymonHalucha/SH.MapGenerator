@@ -1,0 +1,11 @@
+#pragma kernel Clear
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+
+[numthreads(8, 8, 1)]
+void Clear(uint3 id : SV_DispatchThreadID)
+{
+    TargetBuffer[id.x + id.y * _Size] = 0.0;
+}

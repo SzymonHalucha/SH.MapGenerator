@@ -1,0 +1,14 @@
+#pragma kernel Cutoff
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Min;
+float _Max;
+
+[numthreads(8, 8, 1)]
+void Cutoff(uint3 id : SV_DispatchThreadID)
+{
+    float value = TargetBuffer[id.x + id.y * _Size];
+    TargetBuffer[id.x + id.y * _Size] = (value < _Min || value > _Max) ? 0.0 : value;
+}
