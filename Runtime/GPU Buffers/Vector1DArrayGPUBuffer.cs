@@ -9,34 +9,34 @@ namespace SH.MapGenerator.GPUBuffers
         public override void Init(int size)
         {
             Size = size;
-            Buffer = new ComputeBuffer(Size, sizeof(float) * 2);
-            Buffer.SetData(new Vector2[Size]);
+            Buffer = new ComputeBuffer(Size, sizeof(float) * 3);
+            Buffer.SetData(new Vector3[Size]);
         }
 
-        public void Init(int size, NativeArray<Vector2> array)
+        public void Init(NativeArray<Vector3> array)
         {
-            Size = size;
-            Buffer = new ComputeBuffer(Size, sizeof(float) * 2);
+            Size = array.Length;
+            Buffer = new ComputeBuffer(Size, sizeof(float) * 3);
             Buffer.SetData(array);
         }
 
-        public void Init(int size, Vector2[] array)
+        public void Init(Vector3[] array)
         {
-            Size = size;
-            Buffer = new ComputeBuffer(Size, sizeof(float) * 2);
+            Size = array.Length;
+            Buffer = new ComputeBuffer(Size, sizeof(float) * 3);
             Buffer.SetData(array);
         }
 
-        public override void DeInit()
+        public override void Dispose()
         {
             Size = 0;
             Buffer.Release();
             Buffer = null;
         }
 
-        public Vector2[] GetData()
+        public Vector3[] GetData()
         {
-            Vector2[] data = new Vector2[Size];
+            Vector3[] data = new Vector3[Size];
             Buffer.GetData(data);
             return data;
         }

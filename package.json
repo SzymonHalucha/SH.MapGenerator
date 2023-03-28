@@ -1,6 +1,6 @@
 {
     "name": "com.sh.mapgenerator",
-    "version": "1.0.0",
+    "version": "1.1.1",
     "displayName": "Map Generator",
     "description": "This is a procedural map generator.",
     "unity": "2021.3",
@@ -15,14 +15,14 @@
     ],
     "samples": [
         {
-            "displayName": "Flat4K",
-            "description": "Includes flat world in 4k resolution",
-            "path": "Samples~/Flat4K"
+            "displayName": "Flat1K",
+            "description": "Includes flat world in 1k resolution",
+            "path": "Samples~/Flat1K"
         },
         {
-            "displayName": "World4K",
-            "description": "Includes normal world in 4k resolution",
-            "path": "Samples~/World4K"
+            "displayName": "Normal2K",
+            "description": "Includes normal world in 2k resolution",
+            "path": "Samples~/Normal2K"
         }
     ],
     "author": {

@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Biome 2 Resources
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394812362129436
+  - rid: 5590394812362129441
+  - rid: 5590394812362129438
+  - rid: 5590394816200704012
+  - rid: 5590394816200704013
+  - rid: 5590394816200704014
+  - rid: 5590394812362129440
+  - rid: 5590394924770787332
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394812362129436
+      type: {class: BlueNoiseGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+        amountSqrt: 64
+    - rid: 5590394812362129438
+      type: {class: MultiplyPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: b021ac3a3b6746f439e3d26a74ec5494, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394812362129440
+      type: {class: GetPointsGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsGPUBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+        pointsCPUBuffer: {fileID: 11400000, guid: a9edb318d18fdc940bba7f0acb453f01, type: 2}
+    - rid: 5590394812362129441
+      type: {class: SetPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394816200704012
+      type: {class: PerlinNoiseGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        octaves: 3
+        scale: 192
+        persistence: 0.7
+        lacunarity: 3
+    - rid: 5590394816200704013
+      type: {class: GreaterThanGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        threshold: 0
+    - rid: 5590394816200704014
+      type: {class: MultiplyPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394924770787332
+      type: {class: SetPrefabsGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: a9edb318d18fdc940bba7f0acb453f01, type: 2}
+        sourcesManager: {fileID: 11400000, guid: 40285c4ad7a761c428b89f42c77e8c1f, type: 2}
+        resourceLayer:
+          serializedVersion: 2
+          m_Bits: 128
+        containers:
+        - prefab: {fileID: -650472354078420266, guid: a6a22da8bce27dc44b5271095681fa31, type: 3}
+          weight: 1
+          radius: 0
+          destroyOthers: 0
+          makeParent: 1

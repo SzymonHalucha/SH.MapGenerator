@@ -1,21 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
+using SH.MapGenerator.Sources;
+using SH.MapGenerator.GPUBuffers;
+using SH.MapGenerator.CPUBuffers;
 using Random = SH.MapGenerator.Utils.Random;
 
 namespace SH.MapGenerator
 {
     public class RuntimeData
     {
-        private Random random;
-        private Dictionary<TerrainLayer, int> terrainLayers;
-
-        public Random Random => random;
-        public IReadOnlyDictionary<TerrainLayer, int> TerrainLayers => terrainLayers;
-
-        public RuntimeData(Random random, Dictionary<TerrainLayer, int> terrainLayers)
-        {
-            this.random = random;
-            this.terrainLayers = terrainLayers;
-        }
+        public HashSet<BaseGPUBuffer> GPUBuffers;
+        public HashSet<BaseCPUBuffer> CPUBuffers;
+        public Dictionary<TerrainLayer, int> TerrainLayers;
+        public Random Random;
+        public int HeightMapScale;
+        public int HeightMapSize;
+        public int SplatMapSize;
     }
 }

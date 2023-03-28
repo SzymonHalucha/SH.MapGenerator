@@ -34,7 +34,7 @@ namespace SH.MapGenerator.GPUBuffers
             Buffer.SetData(array);
         }
 
-        public override void DeInit()
+        public override void Dispose()
         {
             Width = 0;
             Height = 0;

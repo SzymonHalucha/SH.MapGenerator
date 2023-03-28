@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SH.MapGenerator.Utils
@@ -6,13 +7,10 @@ namespace SH.MapGenerator.Utils
     public static class ComputeShadersContrainer
     {
         private static Dictionary<string, ComputeShader> cachedKernels;
-        
+
         private static void Init()
         {
-            cachedKernels = new Dictionary<string, ComputeShader>();
-
-            foreach (ComputeShader shader in Resources.LoadAll<ComputeShader>("Map Generator"))
-                cachedKernels.Add(shader.name, shader);
+            cachedKernels = Resources.LoadAll<ComputeShader>("Map Generator").ToDictionary(shader => shader.name);
         }
 
         public static ComputeShader GetShader(string name)

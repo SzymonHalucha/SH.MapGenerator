@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Final Mask
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394834434129957
+  - rid: 5590394834434130017
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394834434129957
+      type: {class: SetHeightMapGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        heightMapBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+    - rid: 5590394834434130017
+      type: {class: SetSplatMapGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        splatMapBuffer: {fileID: 11400000, guid: 319ca95d805d965469da5f3eb6c71fab, type: 2}

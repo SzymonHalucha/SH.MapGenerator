@@ -1,0 +1,71 @@
+#pragma kernel MultiplyPointsValues
+#pragma kernel DividePointsValues
+#pragma kernel AddPointsValues
+#pragma kernel SubtractPointsValues
+#pragma kernel SetPointsValues
+
+StructuredBuffer<float> MaskBuffer;
+RWStructuredBuffer<float3> PointsBuffer;
+
+uint _Size;
+uint _PointsCountSqrt;
+
+[numthreads(8, 8, 1)]
+void MultiplyPointsValues(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _PointsCountSqrt || id.y >= _PointsCountSqrt)
+        return;
+
+    float x = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].x * _Size);
+    float y = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].y * _Size);
+
+    PointsBuffer[id.x + id.y * _PointsCountSqrt].z *= MaskBuffer[uint(x) + uint(y) * _Size];
+}
+
+[numthreads(8, 8, 1)]
+void DividePointsValues(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _PointsCountSqrt || id.y >= _PointsCountSqrt)
+        return;
+
+    float x = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].x * _Size);
+    float y = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].y * _Size);
+
+    PointsBuffer[id.x + id.y * _PointsCountSqrt].z /= MaskBuffer[uint(x) + uint(y) * _Size];
+}
+
+[numthreads(8, 8, 1)]
+void AddPointsValues(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _PointsCountSqrt || id.y >= _PointsCountSqrt)
+        return;
+
+    float x = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].x * _Size);
+    float y = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].y * _Size);
+
+    PointsBuffer[id.x + id.y * _PointsCountSqrt].z += MaskBuffer[uint(x) + uint(y) * _Size];
+}
+
+[numthreads(8, 8, 1)]
+void SubtractPointsValues(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _PointsCountSqrt || id.y >= _PointsCountSqrt)
+        return;
+
+    float x = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].x * _Size);
+    float y = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].y * _Size);
+
+    PointsBuffer[id.x + id.y * _PointsCountSqrt].z -= MaskBuffer[uint(x) + uint(y) * _Size];
+}
+
+[numthreads(8, 8, 1)]
+void SetPointsValues(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _PointsCountSqrt || id.y >= _PointsCountSqrt)
+        return;
+
+    float x = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].x * _Size);
+    float y = floor(PointsBuffer[id.x + id.y * _PointsCountSqrt].y * _Size);
+
+    PointsBuffer[id.x + id.y * _PointsCountSqrt].z = MaskBuffer[uint(x) + uint(y) * _Size];
+}

@@ -10,5 +10,5 @@ uint _Index;
 void PasteOnMask(uint3 id : SV_DispatchThreadID)
 {
     float value = TargetBuffer[id.x + id.y * _Size];
-    TargetBuffer[id.x + id.y * _Size] = (value - 1.0 == float(_Index)) ? BiomeBuffer[id.x + id.y * _Size] : value;
+    TargetBuffer[id.x + id.y * _Size] = (value == float(_Index)) ? BiomeBuffer[id.x + id.y * _Size] : value;
 }

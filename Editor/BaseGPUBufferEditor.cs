@@ -30,7 +30,7 @@ namespace SH.MapGenerator.Editor
                     EditorGUILayout.LabelField($"Data is initialized with {buffer.Size} elements. (Allocated: {size} KB)");
 
                 if (GUILayout.Button("Deinitialize"))
-                    buffer.DeInit();
+                    buffer.Dispose();
             }
             else
             {

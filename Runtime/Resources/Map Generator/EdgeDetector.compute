@@ -5,10 +5,14 @@ RWStructuredBuffer<float> TargetBuffer;
 
 uint _Size;
 float _Threshold;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void EdgeDetector(uint3 id : SV_DispatchThreadID)
 {
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
     float radiusX = 0;
     float radiusY = 0;
 
@@ -16,8 +20,8 @@ void EdgeDetector(uint3 id : SV_DispatchThreadID)
     {
         for (int kernelY = -1; kernelY <= 1; kernelY++)
         {
-            int px = id.x + kernelX;
-            int py = id.y + kernelY;
+            int px = x + kernelX;
+            int py = y + kernelY;
 
             if (px < 0 || px >= int(_Size) || py < 0 || py >= int(_Size))
                 continue;
@@ -29,5 +33,5 @@ void EdgeDetector(uint3 id : SV_DispatchThreadID)
     }
 
     float radius = sqrt(radiusX * radiusX + radiusY * radiusY);
-    TargetBuffer[id.x + id.y * _Size] = float(radius > _Threshold);
+    TargetBuffer[x + y * _Size] = float(radius > _Threshold);
 }

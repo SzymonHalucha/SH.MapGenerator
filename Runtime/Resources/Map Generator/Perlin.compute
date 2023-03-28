@@ -9,10 +9,13 @@ uint _Octaves;
 float _Scale;
 float _Persistence;
 float _Lacunarity;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void Perlin(uint3 id : SV_DispatchThreadID)
 {
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
     float noise = 0.0;
     float frequency = 1.0;
     float amplitude = 1.0;
@@ -21,8 +24,8 @@ void Perlin(uint3 id : SV_DispatchThreadID)
     for (uint i = 0; i < _Octaves; i++)
     {
         float2 offset = float2(Range(_Seed + i, -100000, 100000), Range(_Seed + _Octaves - i, -100000, 100000));
-        float scaledX = (float(id.x) - (float(_Size) * 0.5) + offset.x) / _Scale * frequency;
-        float scaledY = (float(id.y) - (float(_Size) * 0.5) + offset.y) / _Scale * frequency;
+        float scaledX = (float(x) - (float(_Size) * 0.5) + offset.x) / _Scale * frequency;
+        float scaledY = (float(y) - (float(_Size) * 0.5) + offset.y) / _Scale * frequency;
 
         noise += PerlinNoise(scaledX, scaledY) * amplitude;
         amplitudeSum += amplitude;
@@ -30,5 +33,5 @@ void Perlin(uint3 id : SV_DispatchThreadID)
         frequency *= _Lacunarity;
     }
 
-    TargetBuffer[id.x + id.y * _Size] = noise / amplitudeSum;
+    TargetBuffer[x + y * _Size] = noise / amplitudeSum;
 }

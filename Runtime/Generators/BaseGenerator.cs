@@ -1,5 +1,6 @@
 using UnityEngine;
 using SH.MapGenerator.GPUBuffers;
+using SH.MapGenerator.CPUBuffers;
 
 namespace SH.MapGenerator.Generators
 {
@@ -10,6 +11,8 @@ namespace SH.MapGenerator.Generators
 
         public abstract void Generate(RuntimeData data);
         public abstract BaseGPUBuffer[] GetAllGPUBuffers();
+
+        public virtual BaseCPUBuffer[] GetAllCPUBuffers() => new BaseCPUBuffer[0];
         public virtual TerrainLayer[] GetAllTerrainLayers() => new TerrainLayer[0];
 
         protected void DispatchComputeShader(ComputeShader compute, int kernel, int width, int height)

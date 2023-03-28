@@ -1,0 +1,17 @@
+#pragma kernel Multiply
+
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+float _Multiplier;
+float2 _StartOffset;
+
+[numthreads(8, 8, 1)]
+void Multiply(uint3 id : SV_DispatchThreadID)
+{
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
+    float value = TargetBuffer[x + y * _Size];
+    TargetBuffer[x + y * _Size] = value * _Multiplier;
+}

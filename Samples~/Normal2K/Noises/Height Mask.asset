@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Height Mask
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394834434129966
+  - rid: 5590394834434129964
+  - rid: 5590394834434129958
+  - rid: 5590394834434129959
+  - rid: 5590394834434129960
+  - rid: 5590394834434129970
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394834434129958
+      type: {class: PerlinNoiseGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        octaves: 6
+        scale: 160
+        persistence: 0.5
+        lacunarity: 1.6
+    - rid: 5590394834434129959
+      type: {class: NormalizeGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+    - rid: 5590394834434129960
+      type: {class: MultiplyBlendGenerator, ns: SH.MapGenerator.Generators.Blends, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        blendBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        weight: 1
+    - rid: 5590394834434129964
+      type: {class: ClampGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        min: 0
+        max: 0.5
+    - rid: 5590394834434129966
+      type: {class: CopyGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        originBuffer: {fileID: 11400000, guid: 67d44ef11e129714aa4013aeea2112b3, type: 2}
+        targetBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+    - rid: 5590394834434129970
+      type: {class: LerpBlendGenerator, ns: SH.MapGenerator.Generators.Blends, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        blendBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        weight: 0.4

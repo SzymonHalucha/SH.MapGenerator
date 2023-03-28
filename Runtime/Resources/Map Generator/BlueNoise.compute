@@ -1,7 +1,7 @@
 #include "Utils.cginc"
 #pragma kernel BlueNoise
 
-RWStructuredBuffer<float2> TargetBuffer;
+RWStructuredBuffer<float3> TargetBuffer;
 
 uint _Size;
 uint _Seed;
@@ -21,5 +21,5 @@ void BlueNoise(uint3 id : SV_DispatchThreadID)
 
     float randomX = Range(uint(_Seed + id.x + id.y * _Size), offsetX * cellSize - partCellSize, offsetX * cellSize + partCellSize);
     float randomY = Range(uint(_Seed + id.y + id.x * _Size), offsetY * cellSize - partCellSize, offsetY * cellSize + partCellSize);
-    TargetBuffer[id.x + id.y * _Size] = float2(randomX, randomY);
+    TargetBuffer[id.x + id.y * _Size] = float3(randomX, randomY, id.x + id.y * _Size);
 }

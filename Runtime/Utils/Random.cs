@@ -103,5 +103,51 @@ namespace SH.MapGenerator.Utils
         {
             return Range() * (max - min) + min;
         }
+
+        public int Weighted(float[] weights)
+        {
+            float weightSum = 0;
+            foreach (float weight in weights)
+                weightSum += weight;
+
+            float selected = Range(weightSum);
+            float weightCurrent = 0;
+            float weightPrevious = 0;
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                weightCurrent += weights[i];
+
+                if (selected <= weightCurrent && selected >= weightPrevious)
+                    return i;
+
+                weightPrevious += weights[i];
+            }
+
+            return 0;
+        }
+
+        public int Weighted(int[] weights)
+        {
+            int weightSum = 0;
+            foreach (int weight in weights)
+                weightSum += weight;
+
+            int selected = Range(weightSum);
+            int weightCurrent = 0;
+            int weightPrevious = 0;
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                weightCurrent += weights[i];
+
+                if (selected <= weightCurrent && selected >= weightPrevious)
+                    return i;
+
+                weightPrevious += weights[i];
+            }
+
+            return 0;
+        }
     }
 }

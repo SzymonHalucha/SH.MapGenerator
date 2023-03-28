@@ -6,24 +6,28 @@ RWStructuredBuffer<float> TargetBuffer;
 uint _Size;
 float _Sigma;
 int _KernelRadius;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void GaussianBlur(uint3 id : SV_DispatchThreadID)
 {
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
     float sum = 0;
 
     for (int i = -_KernelRadius; i <= _KernelRadius; i++)
     {
         for (int j = -_KernelRadius; j <= _KernelRadius; j++)
         {
-            int x = id.x + i;
-            int y = id.y + j;
+            int scaledX = x + i;
+            int scaledY = y + j;
 
-            float statement = float(x >= 0 && x < int(_Size) && y >= 0 && y < int(_Size));
+            float statement = float(scaledX >= 0 && scaledX < int(_Size) && scaledY >= 0 && scaledY < int(_Size));
             float value = (1.0 / (6.28318530718 * _Sigma * _Sigma)) * exp(-((i * i + j * j) / (2.0 * _Sigma * _Sigma)));
-            sum += OriginBuffer[x + y * _Size] * value * statement;
+            sum += OriginBuffer[scaledX + scaledY * _Size] * value * statement;
         }
     }
 
-    TargetBuffer[id.x + id.y * _Size] = sum;
+    TargetBuffer[x + y * _Size] = sum;
 }

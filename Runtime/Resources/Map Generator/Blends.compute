@@ -5,6 +5,7 @@
 #pragma kernel MinBlend
 #pragma kernel MaxBlend
 #pragma kernel LerpBlend
+#pragma kernel PowerBlend
 
 StructuredBuffer<float> BlendBuffer;
 RWStructuredBuffer<float> TargetBuffer;
@@ -63,4 +64,12 @@ void LerpBlend(uint3 id : SV_DispatchThreadID)
     uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
     float value = TargetBuffer[index];
     TargetBuffer[index] = lerp(value, BlendBuffer[index], _Weight);
+}
+
+[numthreads(8, 8, 1)]
+void PowerBlend(uint3 id : SV_DispatchThreadID)
+{
+    uint index = (uint(_StartOffset.x) + id.x) + (uint(_StartOffset.y) + id.y) * _Size;
+    float value = TargetBuffer[index];
+    TargetBuffer[index] = lerp(pow(abs(value), BlendBuffer[index]), BlendBuffer[index], _Weight);
 }

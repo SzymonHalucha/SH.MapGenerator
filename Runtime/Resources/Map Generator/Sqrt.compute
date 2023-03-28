@@ -3,10 +3,14 @@
 RWStructuredBuffer<float> TargetBuffer;
 
 uint _Size;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void Sqrt(uint3 id : SV_DispatchThreadID)
 {
-    float value = TargetBuffer[id.x + id.y * _Size];
-    TargetBuffer[id.x + id.y * _Size] = sqrt(value);
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+    
+    float value = TargetBuffer[x + y * _Size];
+    TargetBuffer[x + y * _Size] = sqrt(value);
 }

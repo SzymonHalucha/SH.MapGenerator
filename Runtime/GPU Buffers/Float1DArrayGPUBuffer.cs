@@ -13,21 +13,21 @@ namespace SH.MapGenerator.GPUBuffers
             Buffer.SetData(new float[Size]);
         }
 
-        public void Init(int size, NativeArray<float> array)
+        public void Init(NativeArray<float> array)
         {
-            Size = size;
+            Size = array.Length;
             Buffer = new ComputeBuffer(Size, sizeof(float));
             Buffer.SetData(array);
         }
 
-        public void Init(int size, float[] array)
+        public void Init(float[] array)
         {
-            Size = size;
+            Size = array.Length;
             Buffer = new ComputeBuffer(Size, sizeof(float));
             Buffer.SetData(array);
         }
 
-        public override void DeInit()
+        public override void Dispose()
         {
             Size = 0;
             Buffer.Release();

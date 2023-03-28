@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Island Final Mask
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394856466808832
+  - rid: 5590394856466808833
+  - rid: 5590394868532772865
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394856466808832
+      type: {class: SetHeightMapGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        heightMapBuffer: {fileID: 11400000, guid: 0e56d3979865fc54bab4b53f9008ad84, type: 2}
+    - rid: 5590394856466808833
+      type: {class: SetSplatMapGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        splatMapBuffer: {fileID: 11400000, guid: 32b2380b1a4864f43a87d50251321b45, type: 2}
+    - rid: 5590394868532772865
+      type: {class: BuildSourcesTreesGenerator, ns: SH.MapGenerator.Generators, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        sourcesManager: {fileID: 11400000, guid: b5121b14f07aa4c40930fc7561aad826, type: 2}

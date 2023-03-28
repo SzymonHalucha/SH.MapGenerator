@@ -6,12 +6,16 @@ StructuredBuffer<float> DistortionBuffer;
 
 uint _Size;
 float _Strength;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void Distortion(uint3 id : SV_DispatchThreadID)
 {
-    uint x = max((id.x + int(_Strength * DistortionBuffer[id.x + id.y * _Size] * _Size)) % _Size, 0);
-    uint y = max((id.y + int(_Strength * DistortionBuffer[(_Size - id.x - 1) + (_Size - id.y - 1) * _Size] * _Size)) % _Size, 0);
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
 
-    TargetBuffer[id.x + id.y * _Size] = OriginBuffer[x + y * _Size];
+    uint distortedX = max((x + int(_Strength * DistortionBuffer[x + y * _Size] * _Size)) % _Size, 0);
+    uint distortedY = max((y + int(_Strength * DistortionBuffer[(_Size - x - 1) + (_Size - y - 1) * _Size] * _Size)) % _Size, 0);
+
+    TargetBuffer[x + y * _Size] = OriginBuffer[distortedX + distortedY * _Size];
 }

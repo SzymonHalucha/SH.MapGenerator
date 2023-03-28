@@ -3,12 +3,17 @@
 RWStructuredBuffer<float> TargetBuffer;
 
 uint _Size;
+uint _PartialSize;
 float _Radius;
-float2 _Center;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void DistanceNoise(uint3 id : SV_DispatchThreadID)
 {
-    float2 scaled = float2(0.5 - float(id.x) / _Size + _Center.x, 0.5 - float(id.y) / _Size + _Center.y);
-    TargetBuffer[id.x + id.y * _Size] = pow(sqrt(scaled.x * scaled.x * scaled.x * scaled.x + scaled.y * scaled.y * scaled.y * scaled.y), _Radius);
+    uint index = (id.x + uint(_StartOffset.x)) + (id.y + uint(_StartOffset.y)) * _Size; 
+    float2 scaled = float2((_PartialSize / 2.0 - float(id.x)) / _Size, (_PartialSize / 2.0 - float(id.y)) / _Size);
+    float newValue = pow(sqrt(scaled.x * scaled.x + scaled.y * scaled.y), _Radius);
+    float oldValue = TargetBuffer[index];
+
+    TargetBuffer[index] = ((_StartOffset.x == 0 && _StartOffset.y == 0) || oldValue == 0.0) ? newValue : min(newValue, oldValue);
 }

@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Biome 1 Resources
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394812362129436
+  - rid: 5590394812362129441
+  - rid: 5590394812362129438
+  - rid: 5590394816200704012
+  - rid: 5590394816200704015
+  - rid: 5590394816200704014
+  - rid: 5590394812362129440
+  - rid: 5590394924770787331
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394812362129436
+      type: {class: BlueNoiseGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+        amountSqrt: 320
+    - rid: 5590394812362129438
+      type: {class: MultiplyPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: b021ac3a3b6746f439e3d26a74ec5494, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394812362129440
+      type: {class: GetPointsGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsGPUBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+        pointsCPUBuffer: {fileID: 11400000, guid: a9edb318d18fdc940bba7f0acb453f01, type: 2}
+    - rid: 5590394812362129441
+      type: {class: SetPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394816200704012
+      type: {class: PerlinNoiseGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        octaves: 2
+        scale: 96
+        persistence: 0.5
+        lacunarity: 4
+    - rid: 5590394816200704014
+      type: {class: MultiplyPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 78680ac6e169a8045b2b729c35774274, type: 2}
+    - rid: 5590394816200704015
+      type: {class: LessThanGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 5e9179827c4e5c6429653aefe6b41b00, type: 2}
+        threshold: 0.1
+    - rid: 5590394924770787331
+      type: {class: SetPrefabsGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: a9edb318d18fdc940bba7f0acb453f01, type: 2}
+        sourcesManager: {fileID: 11400000, guid: 40285c4ad7a761c428b89f42c77e8c1f, type: 2}
+        resourceLayer:
+          serializedVersion: 2
+          m_Bits: 128
+        containers:
+        - prefab: {fileID: 7697255896217112038, guid: 8804137fb1ae64549a85d103fb43280d, type: 3}
+          weight: 1
+          radius: 0
+          destroyOthers: 0
+          makeParent: 1
+        - prefab: {fileID: -86471312828037067, guid: 2907f5f6cfa5aa04abe0caec40b53c5a, type: 3}
+          weight: 0.01
+          radius: 12
+          destroyOthers: 1
+          makeParent: 1
+        - prefab: {fileID: -7045942411690617891, guid: 13c83790761962d45aa2d8fe4ce030b6, type: 3}
+          weight: 0.01
+          radius: 12
+          destroyOthers: 1
+          makeParent: 1

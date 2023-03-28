@@ -4,9 +4,13 @@ StructuredBuffer<float> OriginBuffer;
 RWStructuredBuffer<float> TargetBuffer;
 
 uint _Size;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void Copy(uint3 id : SV_DispatchThreadID)
 {
-    TargetBuffer[id.x + id.y * _Size] = OriginBuffer[id.x + id.y * _Size];
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
+    TargetBuffer[x + y * _Size] = OriginBuffer[x + y * _Size];
 }

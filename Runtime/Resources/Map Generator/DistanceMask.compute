@@ -1,0 +1,19 @@
+#pragma kernel DistanceMask
+
+StructuredBuffer<float3> PointsBuffer;
+RWStructuredBuffer<float> TargetBuffer;
+
+uint _Size;
+uint _PointsCount;
+float _Threshold;
+
+[numthreads(8, 8, 1)]
+void DistanceMask(uint3 id : SV_DispatchThreadID)
+{
+    for (uint i = 0; i < _PointsCount; i++)
+    {
+        float3 selectedPoint = float3(PointsBuffer[i].x, PointsBuffer[i].y, 0.5);
+        if (length(0.5 - selectedPoint) > _Threshold && uint(TargetBuffer[id.x + id.y * _Size]) == i)
+            TargetBuffer[id.x + id.y * _Size] = 0.0;
+    }
+}

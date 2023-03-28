@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c05cc3c7a07bc47b3124ac58ccabed, type: 3}
+  m_Name: Biomes Mask
+  m_EditorClassIdentifier: 
+  enabled: 1
+  generators:
+  - rid: 5590394812362129408
+  - rid: 5590394812362129409
+  - rid: 5590394812362129410
+  - rid: 5590394812362129411
+  - rid: 5590394812362129412
+  - rid: 5590394812362129415
+  - rid: 5590394812362129414
+  references:
+    version: 2
+    RefIds:
+    - rid: 5590394812362129408
+      type: {class: BlueNoiseGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: 93c7b13dfad202f4ca0f9ec748361464, type: 2}
+        amountSqrt: 6
+    - rid: 5590394812362129409
+      type: {class: VoronoiGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        pointsBuffer: {fileID: 11400000, guid: 93c7b13dfad202f4ca0f9ec748361464, type: 2}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+    - rid: 5590394812362129410
+      type: {class: DistanceMaskGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        pointsBuffer: {fileID: 11400000, guid: 93c7b13dfad202f4ca0f9ec748361464, type: 2}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        threshold: 0.33
+    - rid: 5590394812362129411
+      type: {class: RandomRemapGenerator, ns: SH.MapGenerator.Generators.Biomes, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        originBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        targetBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        minRange: 1
+        maxRange: 4
+    - rid: 5590394812362129412
+      type: {class: SetPointsValuesGenerator, ns: SH.MapGenerator.Generators.Points, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        maskBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        pointsBuffer: {fileID: 11400000, guid: 93c7b13dfad202f4ca0f9ec748361464, type: 2}
+    - rid: 5590394812362129414
+      type: {class: DistortionGenerator, ns: SH.MapGenerator.Generators.Modifiers, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        distortionBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        originBuffer: {fileID: 11400000, guid: c065b0d1fff86ab4f96a179be99e9f36, type: 2}
+        targetBuffer: {fileID: 11400000, guid: 67d44ef11e129714aa4013aeea2112b3, type: 2}
+        strength: 0.04
+    - rid: 5590394812362129415
+      type: {class: PerlinNoiseGenerator, ns: SH.MapGenerator.Generators.Noises, asm: SH.MapGenerator}
+      data:
+        <Enabled>k__BackingField: 1
+        boundsBuffer: {fileID: 0}
+        targetBuffer: {fileID: 11400000, guid: 7e1643271cef7874aba680be76b25d9a, type: 2}
+        octaves: 4
+        scale: 128
+        persistence: 0.5
+        lacunarity: 1.7

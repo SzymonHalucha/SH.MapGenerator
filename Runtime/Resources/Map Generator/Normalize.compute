@@ -7,11 +7,15 @@ RWStructuredBuffer<int> MinMaxBuffer;
 RWStructuredBuffer<float> TargetBuffer;
 
 uint _Size;
+float2 _StartOffset;
 
 [numthreads(8, 8, 1)]
 void MinMax(uint3 id : SV_DispatchThreadID)
 {
-    int value = int(TargetBuffer[id.x + id.y * _Size] * PRECISION);
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
+    int value = int(TargetBuffer[x + y * _Size] * PRECISION);
     int oldValue;
 
     InterlockedMin(MinMaxBuffer[0], value, oldValue);
@@ -21,6 +25,9 @@ void MinMax(uint3 id : SV_DispatchThreadID)
 [numthreads(8, 8, 1)]
 void Normalize(uint3 id : SV_DispatchThreadID)
 {
-    float value = TargetBuffer[id.x + id.y * _Size];
-    TargetBuffer[id.x + id.y * _Size] = (value - MinMaxBuffer[0] / float(PRECISION)) / (MinMaxBuffer[1] / float(PRECISION) - MinMaxBuffer[0] / float(PRECISION));
+    uint x = id.x + _StartOffset.x;
+    uint y = id.y + _StartOffset.y;
+
+    float value = TargetBuffer[x + y * _Size];
+    TargetBuffer[x + y * _Size] = (value - MinMaxBuffer[0] / float(PRECISION)) / (MinMaxBuffer[1] / float(PRECISION) - MinMaxBuffer[0] / float(PRECISION));
 }

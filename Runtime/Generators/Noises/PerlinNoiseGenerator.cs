@@ -1,11 +1,13 @@
 using UnityEngine;
 using SH.MapGenerator.GPUBuffers;
+using SH.MapGenerator.CPUBuffers;
 using SH.MapGenerator.Utils;
 
 namespace SH.MapGenerator.Generators.Noises
 {
-    public class PerlinGenerator : BaseNoiseGenerator
+    public class PerlinNoiseGenerator : BaseGenerator
     {
+        [SerializeField] private Bounds1DArrayCPUBuffer boundsBuffer = null;
         [SerializeField] private Float2DArrayGPUBuffer targetBuffer = null;
         [SerializeField, Range(1, 16)] private int octaves = 4;
         [SerializeField, Range(0, 512f)] private float scale = 30f;
@@ -14,6 +16,9 @@ namespace SH.MapGenerator.Generators.Noises
 
         public override void Generate(RuntimeData data)
         {
+            if (boundsBuffer != null && boundsBuffer.Size == 0)
+                return;
+
             ComputeShader shader = ComputeShadersContrainer.GetShader("Perlin");
             int kernel = shader.FindKernel("Perlin");
 
@@ -23,14 +28,23 @@ namespace SH.MapGenerator.Generators.Noises
             shader.SetFloat("_Scale", scale);
             shader.SetFloat("_Persistence", persistence);
             shader.SetFloat("_Lacunarity", lacunarity);
+            shader.SetVector("_StartOffset", boundsBuffer != null ? boundsBuffer.StartOffset : Vector2.zero);
             shader.SetBuffer(kernel, "TargetBuffer", targetBuffer.Buffer);
 
-            DispatchComputeShader(shader, kernel, targetBuffer.Width, targetBuffer.Height);
+            if (boundsBuffer != null)
+                DispatchComputeShader(shader, kernel, boundsBuffer.Size, boundsBuffer.Size);
+            else
+                DispatchComputeShader(shader, kernel, targetBuffer.Width, targetBuffer.Height);
         }
 
         public override BaseGPUBuffer[] GetAllGPUBuffers()
         {
             return new BaseGPUBuffer[] { targetBuffer };
+        }
+
+        public override BaseCPUBuffer[] GetAllCPUBuffers()
+        {
+            return new BaseCPUBuffer[] { boundsBuffer };
         }
     }
 }
